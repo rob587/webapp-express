@@ -13,7 +13,7 @@ const index = (req, res) =>{
 
 
 const show = (req, res) =>{
-    const {id} = req.params.id
+    const id = req.params.id
     
     const sql = 'SELECT * FROM movies WHERE ID = ?'
     connection.query(sql, [id], (err,results) =>{
