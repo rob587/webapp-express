@@ -1,11 +1,23 @@
+require('dotenv').config()
 const express = require ('express')
 const connection = require ('./data/db')
+const cors = require ('cors')
+const path = require('path')
+
+
 
 const app = express()
 
-const port = process.env.PORT
+const port = 3000
 
 const movieRouter = require('./router/moviesRouting')
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(cors())
+
+
+
 
 app.get('/', (req, res)=>{
     res.send('CIAO MONDO')
