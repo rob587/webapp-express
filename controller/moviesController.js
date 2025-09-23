@@ -32,6 +32,26 @@ const show = (req, res) =>{
     })
 }
 
+const store = (req, res, next) =>{
+    const {title, author, abstract} = req.body
+    console.log(req.file)
+
+    const fileName = `${req.file.filename}`
+    
+
+    const query = 'INSERT INTO movies (title, author, abstract) VALUES (?, ?, ?)'
+
+    connection.query(query, [title, author, fileName, abstract], (err, results)=>{
+        if (err) {
+            return res.status(500).json({error: 'Errore durante inserimento' +err})           
+        }
+        res.status(201).json({
+            result: true,
+            message: 'film creato con successo'
+        })
+    })
+}
+
 module.exports={
     index,
     show
