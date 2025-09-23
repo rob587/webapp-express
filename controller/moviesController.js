@@ -64,8 +64,8 @@ const storeReview = (req, res) =>{
 
     const {text, name, vote} = req.body
 
-    const sql = 'INSERT * INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)'
-
+    const sql = 'INSERT INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)'
+    
     connection.query(sql, [id, name, vote, text], (err, results)=>{
         if(err) return res.status(500).json({error: 'errore durante inserimento della recensione'})
 
