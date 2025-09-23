@@ -33,8 +33,14 @@ const show = (req, res) =>{
 }
 
 const store = (req, res, next) =>{
+        console.log('Body ricevuto:', req.body)
+    console.log('File ricevuto:', req.file)
     const {title, author, abstract} = req.body
     console.log(req.file)
+
+        if (!req.file) {
+        return res.status(400).json({error: 'File immagine richiesto'})
+    }
 
     const fileName = `${req.file.filename}`
     
@@ -52,8 +58,26 @@ const store = (req, res, next) =>{
     })
 }
 
+
+const storeReview = (req, res) =>{
+    const {id} = req.params
+
+    const {text, name, vote} = req.body
+
+    const sql = 'INSERT * INTO reviews (movie_id, name, vote, text) VALUES (?, ?, ?, ?)'
+
+    connection.query(sql, [id, name, vote, text], (err, results)=>{
+        if(err) return res.status(500).json({error: 'errore durante inserimento della recensione'})
+
+        res.status(201).json({result: true, message: 'recensione inserita'})
+    })
+
+
+}
+
 module.exports={
     index,
     show,
-    store
+    store,
+    storeReview
 }
