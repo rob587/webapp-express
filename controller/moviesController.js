@@ -39,7 +39,7 @@ const store = (req, res, next) =>{
     const fileName = `${req.file.filename}`
     
 
-    const query = 'INSERT INTO movies (title, author, image abstract) VALUES (?, ?, ?, ?)'
+    const query = 'INSERT INTO movies (title, author, image, abstract) VALUES (?, ?, ?, ?)'
 
     connection.query(query, [title, author, fileName, abstract], (err, results)=>{
         if (err) {
