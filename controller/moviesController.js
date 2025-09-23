@@ -35,7 +35,7 @@ const show = (req, res) =>{
 const store = (req, res, next) =>{
         console.log('Body ricevuto:', req.body)
     console.log('File ricevuto:', req.file)
-    const {title, author, abstract} = req.body
+    const {title, director, abstract} = req.body
     console.log(req.file)
 
         if (!req.file) {
@@ -45,9 +45,9 @@ const store = (req, res, next) =>{
     const fileName = `${req.file.filename}`
     
 
-    const query = 'INSERT INTO movies (title, author, image, abstract) VALUES (?, ?, ?, ?)'
+    const query = 'INSERT INTO movies (title, director, image, abstract) VALUES (?, ?, ?, ?)'
 
-    connection.query(query, [title, author, fileName, abstract], (err, results)=>{
+    connection.query(query, [title, director, fileName, abstract], (err, results)=>{
         if (err) {
             return res.status(500).json({error: 'Errore durante inserimento' +err})           
         }
